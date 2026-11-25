@@ -1,17 +1,12 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dashboard | Data Alumni FT</title>
-</head>
-<body>
-    <p>Halo, {{ auth()->user()->name }}</p>
-    <p>Peran: {{ auth()->user()->role }}</p>
+@extends('layouts.app')
 
-    <form method="POST" action="{{ route('logout') }}">
-        @csrf
-        <button type="submit">Keluar</button>
-    </form>
-</body>
-</html>
+@section('title', 'Dashboard')
+@section('breadcrumb', 'Dashboard')
+@section('judul', 'Dashboard')
+@section('subjudul', 'Ringkasan data alumni')
+
+@section('content')
+    <section class="kartu">
+        <p>Halaman sementara. Isi dashboard dikerjakan anggota kelompok yang memegang fitur dashboard.</p>
+    </section>
+@endsection
