@@ -13,7 +13,11 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        //
+        $middleware->alias([
+            'super_admin' => \App\Http\Middleware\EnsureUserIsSuperAdmin::class,
+            'active' => \App\Http\Middleware\EnsureAccountIsActive::class,
+            'password.fresh' => \App\Http\Middleware\EnsurePasswordIsChanged::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->render(function (HttpException $e, Request $request) {
