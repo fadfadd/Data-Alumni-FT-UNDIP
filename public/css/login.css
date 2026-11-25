@@ -76,10 +76,11 @@ label {
     align-items: center;
     gap: 0.4rem;
     margin: 1rem 0 0.4rem;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 600;
     color: var(--emas);
 }
+
 .icon { width: 1.1rem; height: 1.1rem; }
 
 input {
@@ -148,9 +149,37 @@ input:focus { outline: 2px solid var(--navy); outline-offset: 2px; }
     color: #9b1c1c;
 }
 
+/* Ikon mata di kolom password */
+.pw-wrap { position: relative; }
+.pw-wrap input { padding-right: 3rem; }
+.pw-toggle {
+    position: absolute;
+    top: 50%;
+    right: 0.7rem;
+    transform: translateY(-50%);
+    display: grid;
+    place-items: center;
+    width: 1.8rem;
+    height: 1.8rem;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #6b7280;
+    cursor: pointer;
+}
+.pw-toggle svg { width: 1.3rem; height: 1.3rem; fill: currentColor; }
+.pw-toggle .mata-coret { display: none; }
+.pw-toggle.tampil .mata-buka { display: none; }
+.pw-toggle.tampil .mata-coret { display: block; }
+
 @media (max-width: 480px) {
     .login-card { padding: 1.25rem 1.5rem 1.75rem; }
     .login-logo { padding: 1rem 1.25rem; }
     .login-logo img { height: 56px; }
     .login-heading { font-size: 1.1rem; }
 }
+
+/* Halaman lupa & reset password */
+.login-title.kecil { font-size: 1.7rem; }
+.login-petunjuk { margin: 0 0 0.4rem; font-size: 0.8rem; line-height: 1.5; color: #6b7280; text-align: center; }
