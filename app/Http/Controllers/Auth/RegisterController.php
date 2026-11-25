@@ -29,7 +29,7 @@ class RegisterController extends Controller
         $data = $request->validate([
             'name' => ['required', 'string', 'max:100'],
             'email' => ['required', 'email', 'max:255', 'ends_with:@' . $domain, 'unique:users,email'],
-            'password' => ['required', 'string', 'min:8', 'max:72', 'regex:/^(?=.*[A-Za-z])(?=.*\d).+$/'],
+            'password' => ['required', 'string', 'min:8', 'max:72'],
         ], [
             'name.required' => 'Username wajib diisi.',
             'name.max' => 'Username maksimal 100 karakter.',
@@ -40,7 +40,6 @@ class RegisterController extends Controller
             'password.required' => 'Password wajib diisi.',
             'password.min' => 'Password minimal 8 karakter.',
             'password.max' => 'Password maksimal 72 karakter.',
-            'password.regex' => 'Password harus mengandung huruf dan angka.',
         ]);
 
         // Role dan status SELALU diatur di sini, tidak pernah dari form
@@ -54,6 +53,6 @@ class RegisterController extends Controller
 
         return redirect()
             ->route('login')
-            ->with('status', 'Pendaftaran berhasil. Akun Anda menunggu persetujuan admin sebelum bisa digunakan.');
+            ->with('status', 'Pendaftaran berhasil. Akun Anda akan aktif setelah dikonfirmasi admin. Silakan hubungi admin atau coba login lagi nanti.');
     }
 }
