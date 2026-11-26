@@ -16,108 +16,90 @@
 
         body {
             font-family: Arial, Helvetica, sans-serif;
-            background: #f5f7fb;
+            background: #fff;
             color: #253047;
         }
 
-        /* ===== SIDEBAR ===== */
-
+        /* SIDEBAR */
         .sidebar {
-            width: 250px;
+            width: 268px;
             height: 100vh;
             position: fixed;
             top: 0;
             left: 0;
             display: flex;
             flex-direction: column;
-            background: linear-gradient(180deg, #102e57, #194a7d);
-            color: #c3d0e1;
+            background: linear-gradient(180deg, #102d56, #194b80);
+            color: #9aafc9;
             z-index: 100;
         }
 
         .brand {
-            padding: 28px 18px 20px;
+            padding: 27px 15px 20px;
             text-align: center;
+            flex-shrink: 0;
         }
 
         .brand-logo {
-            width: 90px;
-            height: 105px;
+            display: block;
+            width: 100px;
+            height: 115px;
+            margin: 0 auto 10px;
             object-fit: contain;
-            margin-bottom: 12px;
-        }
-
-        .brand-mark {
-            width: 88px;
-            height: 88px;
-            margin: 0 auto 14px;
-            border: 3px solid #e5b930;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #f6d46d;
-            font-weight: bold;
-            font-size: 25px;
         }
 
         .brand h2 {
-            font-family: Georgia, serif;
-            font-size: 18px;
-            line-height: 1.15;
-            letter-spacing: 1px;
             color: white;
+            font-family: Georgia, serif;
+            font-size: 17px;
+            line-height: 1.12;
             font-weight: normal;
+            letter-spacing: .4px;
         }
 
         .sidebar-nav {
             flex: 1;
             min-height: 0;
             overflow-y: auto;
-            overflow-x: hidden;
-            padding: 0 14px 15px;
-
-            /* menyembunyikan scrollbar */
+            padding: 5px 14px 15px;
             scrollbar-width: none;
-            -ms-overflow-style: none;
         }
 
-        /* chrome, edge, dan safari */
         .sidebar-nav::-webkit-scrollbar {
             display: none;
         }
 
         .nav-section {
-            margin: 17px 10px 9px;
-            color: #8299b6;
+            margin: 18px 15px 9px;
+            color: #8da4c0;
             font-size: 9px;
             font-weight: bold;
-            letter-spacing: 2px;
+            letter-spacing: 1.8px;
             text-transform: uppercase;
         }
 
         .nav-link {
-            min-height: 39px;
-            padding: 0 11px;
-            margin-bottom: 3px;
+            min-height: 36px;
             display: flex;
             align-items: center;
-            gap: 11px;
+            gap: 12px;
+            padding: 0 11px;
+            margin-bottom: 3px;
             border-radius: 8px;
+            color: #91a8c5;
             text-decoration: none;
-            color: #91a6c0;
             font-size: 12px;
-            transition: 0.2s;
+            transition: .2s;
         }
 
         .nav-link:hover:not(.nav-disabled) {
-            background: rgba(7, 32, 65, 0.45);
+            background: rgba(5, 29, 61, .5);
             color: white;
         }
 
         .nav-link.active {
-            background: #0c2850;
-            color: #f3cb46;
+            background: #0a2851;
+            color: #f4ca46;
             font-weight: bold;
         }
 
@@ -132,56 +114,51 @@
             stroke-linejoin: round;
         }
 
-        .nav-link.active .nav-icon {
-            color: white;
-        }
-
         .nav-disabled {
             cursor: default;
         }
 
         .nav-badge {
-            min-width: 17px;
-            height: 17px;
+            min-width: 16px;
+            height: 16px;
             margin-left: auto;
-            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
+            border-radius: 50%;
             background: #f5d77b;
-            color: #57451b;
+            color: #594719;
             font-size: 9px;
             font-weight: bold;
         }
 
-        /* ===== PROFIL SIDEBAR ===== */
-
+        /* PROFIL SIDEBAR */
         .sidebar-bottom {
-            padding: 10px 12px 13px;
             flex-shrink: 0;
+            padding: 10px 13px 12px;
         }
 
         .user-card {
-            background: #f5f7fb;
-            border-radius: 9px;
-            padding: 10px 9px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 9px;
+            padding: 9px;
+            border-radius: 9px;
+            background: #f6f8fc;
         }
 
         .user-avatar {
             width: 29px;
             height: 29px;
-            border-radius: 50%;
-            background: #1b3d77;
-            color: white;
+            flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
+            border-radius: 50%;
+            background: #193d78;
+            color: white;
             font-size: 10px;
             font-weight: bold;
-            flex-shrink: 0;
         }
 
         .user-info {
@@ -189,10 +166,10 @@
         }
 
         .user-name {
+            overflow: hidden;
             color: #263650;
             font-size: 10px;
             font-weight: bold;
-            overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
         }
@@ -204,29 +181,26 @@
         }
 
         .sidebar-version {
-            text-align: center;
-            color: #8298b4;
-            font-size: 8px;
             margin-top: 9px;
+            color: #8298b4;
+            text-align: center;
+            font-size: 8px;
         }
 
-        /* ===== MAIN CONTENT ===== */
-
+        /* MAIN CONTENT */
         .app-main {
-            margin-left: 250px;
             min-height: 100vh;
+            margin-left: 268px;
         }
 
-        /* ===== TOPBAR ===== */
-
+        /* TOPBAR */
         .topbar {
-            height: 68px;
-            padding: 0 25px;
-            background: white;
-            border-bottom: 1px solid #e8edf4;
+            height: 62px;
+            padding: 0 32px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            background: #fff;
             position: sticky;
             top: 0;
             z-index: 50;
@@ -235,13 +209,13 @@
         .breadcrumb {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 9px;
+            color: #929292;
             font-size: 12px;
-            color: #8995a9;
         }
 
         .breadcrumb strong {
-            color: #26334a;
+            color: #173966;
             font-size: 14px;
         }
 
@@ -251,58 +225,48 @@
             gap: 17px;
         }
 
-        .sample-status {
-            padding: 9px 13px;
-            border: 1px solid #e4eaf2;
-            border-radius: 25px;
-            color: #7d8ca3;
-            font-size: 11px;
-        }
-
         .topbar-icon {
-            color: #71819b;
-            font-size: 18px;
-        }
-
-        .notification {
             position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #173966;
         }
 
         .notification-count {
             position: absolute;
-            top: -8px;
-            right: -8px;
-            width: 17px;
-            height: 17px;
+            top: -7px;
+            right: -7px;
+            width: 16px;
+            height: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             border-radius: 50%;
             background: #c93636;
             color: white;
             font-size: 9px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .topbar-avatar {
-            width: 36px;
-            height: 36px;
-            background: #1b3d77;
-            border-radius: 50%;
-            color: white;
+            width: 41px;
+            height: 41px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 11px;
+            border-radius: 50%;
+            background: #173966;
+            color: white;
+            font-size: 12px;
             font-weight: bold;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, .15);
         }
 
         .page-content {
-            padding: 28px;
+            padding: 0 32px 28px;
         }
 
-        /* ===== RESPONSIVE ===== */
-
-        @media (max-width: 850px) {
+        @media (max-width: 900px) {
             .sidebar {
                 width: 220px;
             }
@@ -312,7 +276,12 @@
             }
 
             .page-content {
-                padding: 20px;
+                padding-left: 20px;
+                padding-right: 20px;
+            }
+
+            .topbar {
+                padding: 0 20px;
             }
         }
 
@@ -333,10 +302,6 @@
 
             .topbar {
                 padding: 0 15px;
-            }
-
-            .sample-status {
-                display: none;
             }
         }
     </style>
@@ -374,31 +339,9 @@
             <path d="m8 13 2 2 5-5"/>
         </symbol>
 
-        <symbol id="icon-calendar" viewBox="0 0 24 24">
-            <rect x="3" y="5" width="18" height="16" rx="2"/>
-            <path d="M16 3v4M8 3v4M3 10h18"/>
-        </symbol>
-
-        <symbol id="icon-map" viewBox="0 0 24 24">
-            <path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0z"/>
-            <circle cx="12" cy="10" r="2.5"/>
-        </symbol>
-
-        <symbol id="icon-bell" viewBox="0 0 24 24">
-            <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/>
-            <path d="M10 21h4"/>
-        </symbol>
-
         <symbol id="icon-shield" viewBox="0 0 24 24">
             <path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11z"/>
             <path d="m9 12 2 2 4-4"/>
-        </symbol>
-
-        <symbol id="icon-chart" viewBox="0 0 24 24">
-            <path d="M3 3v18h18"/>
-            <rect x="7" y="12" width="3" height="6"/>
-            <rect x="13" y="7" width="3" height="11"/>
-            <rect x="19" y="4" width="2" height="14"/>
         </symbol>
 
         <symbol id="icon-history" viewBox="0 0 24 24">
@@ -411,9 +354,9 @@
             <path d="M10 11v6m4-6v6"/>
         </symbol>
 
-        <symbol id="icon-settings" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="3"/>
-            <path d="M19.4 15a1.7 1.7 0 0 0 .3 1.9l.1.1-1.8 3.1-.2-.1a1.7 1.7 0 0 0-1.8.1l-.2.1h-3.6l-.1-.2a1.7 1.7 0 0 0-1.6-1l-.2.1-3.2-1.8.1-.2a1.7 1.7 0 0 0-.2-1.8l-.1-.2v-3.6l.2-.1a1.7 1.7 0 0 0 1-1.6l-.1-.2 1.8-3.2.2.1a1.7 1.7 0 0 0 1.8-.2l.2-.1h3.6l.1.2a1.7 1.7 0 0 0 1.6 1l.2-.1 3.2 1.8-.1.2a1.7 1.7 0 0 0 .2 1.8l.1.2v3.6z"/>
+        <symbol id="icon-bell" viewBox="0 0 24 24">
+            <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9"/>
+            <path d="M10 21h4"/>
         </symbol>
 
         <symbol id="icon-user" viewBox="0 0 24 24">
@@ -427,15 +370,11 @@
     <aside class="sidebar">
 
         <div class="brand">
-            @if (file_exists(public_path('images/logo-undip.png')))
-                <img
-                    src="{{ asset('images/logo-undip.png') }}"
-                    alt="Logo UNDIP"
-                    class="brand-logo"
-                >
-            @else
-                <div class="brand-mark">UD</div>
-            @endif
+            <img
+                src="{{ asset('images/logo-undip.png') }}"
+                alt="Logo Universitas Diponegoro"
+                class="brand-logo"
+            >
 
             <h2>UNIVERSITAS<br>DIPONEGORO</h2>
         </div>
@@ -461,40 +400,12 @@
                 Program Studi
             </span>
 
-            <span class="nav-link nav-disabled">
-                <svg class="nav-icon"><use href="#icon-clipboard"/></svg>
-                Data Belum Lengkap
-            </span>
-
-            <div class="nav-section">Analitik</div>
-
-            <span class="nav-link nav-disabled">
-                <svg class="nav-icon"><use href="#icon-calendar"/></svg>
-                Kalender Kelulusan
-            </span>
-
-            <span class="nav-link nav-disabled">
-                <svg class="nav-icon"><use href="#icon-map"/></svg>
-                Peta Sebaran
-            </span>
-
             <div class="nav-section">Operasional</div>
 
             <span class="nav-link nav-disabled">
-                <svg class="nav-icon"><use href="#icon-bell"/></svg>
-                Notifikasi
-                <span class="nav-badge">4</span>
-            </span>
-
-            <span class="nav-link nav-disabled">
-                <svg class="nav-icon"><use href="#icon-shield"/></svg>
+                <svg class="nav-icon"><use href="#icon-clipboard"/></svg>
                 Verifikasi Data
                 <span class="nav-badge">5</span>
-            </span>
-
-            <span class="nav-link nav-disabled">
-                <svg class="nav-icon"><use href="#icon-chart"/></svg>
-                Laporan dan Grafik
             </span>
 
             <a
@@ -513,13 +424,8 @@
             <div class="nav-section">Administrasi</div>
 
             <span class="nav-link nav-disabled">
-                <svg class="nav-icon"><use href="#icon-users"/></svg>
+                <svg class="nav-icon"><use href="#icon-shield"/></svg>
                 Kelola Admin
-            </span>
-
-            <span class="nav-link nav-disabled">
-                <svg class="nav-icon"><use href="#icon-settings"/></svg>
-                Pengaturan Fakultas
             </span>
 
             <span class="nav-link nav-disabled">
@@ -529,23 +435,18 @@
 
         </nav>
 
-        <!-- PROFIL ADMIN -->
         <div class="sidebar-bottom">
 
             <div class="user-card">
-                <div class="user-avatar">
-                    {{ $sidebarInitials }}
-                </div>
+                <div class="user-avatar">{{ $sidebarInitials }}</div>
 
                 <div class="user-info">
                     <div class="user-name">{{ $sidebarName }}</div>
-                    <div class="user-role">Administrator</div>
+                    <div class="user-role">Super Admin</div>
                 </div>
             </div>
 
-            <div class="sidebar-version">
-                SIGMA Alumni • Data contoh
-            </div>
+            <div class="sidebar-version">SIGMA 2026</div>
 
         </div>
 
@@ -554,11 +455,9 @@
     <!-- MAIN AREA -->
     <main class="app-main">
 
-        <!-- TOPBAR -->
         <header class="topbar">
 
             <div class="breadcrumb">
-                <span>▦</span>
                 <span>Fakultas Teknik</span>
                 <span>›</span>
                 <strong>@yield('breadcrumb', 'Dashboard')</strong>
@@ -566,19 +465,11 @@
 
             <div class="topbar-actions">
 
-                <span class="sample-status">
-                    ☁ Data contoh aktif
-                </span>
-
-                <span class="topbar-icon">☾</span>
-
                 <span class="topbar-icon notification">
-                    ♧
+                    <svg class="nav-icon" style="width:22px;height:22px">
+                        <use href="#icon-bell"/>
+                    </svg>
                     <span class="notification-count">4</span>
-                </span>
-
-                <span class="topbar-icon">
-                    <svg class="nav-icon"><use href="#icon-settings"/></svg>
                 </span>
 
                 <div class="topbar-avatar">
@@ -589,7 +480,6 @@
 
         </header>
 
-        <!-- PAGE CONTENT -->
         <section class="page-content">
             @yield('content')
         </section>

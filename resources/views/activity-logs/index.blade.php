@@ -2,94 +2,128 @@
 @extends('layouts.app')
 
 @section('title', 'Riwayat Aktivitas | SIGMA Alumni')
+
 @section('breadcrumb', 'Riwayat Aktivitas')
 
 @push('styles')
 <style>
     .activity-page {
         width: 100%;
+        color: #172b4d;
     }
 
+    /* HEADER */
     .activity-header {
         display: flex;
-        justify-content: space-between;
         align-items: flex-start;
-        gap: 16px;
-        margin-bottom: 25px;
+        justify-content: space-between;
+        gap: 20px;
+        margin-bottom: 24px;
     }
 
-    .activity-title {
+    .activity-heading h1 {
         display: flex;
         align-items: center;
-        gap: 10px;
         flex-wrap: wrap;
-        margin-bottom: 8px;
-    }
-
-    .activity-title h1 {
-        color: #172b4d;
-        font-size: 27px;
+        gap: 12px;
+        margin: 0 0 9px;
+        color: #173966;
+        font-size: 32px;
+        font-weight: 800;
+        letter-spacing: -1px;
     }
 
     .locked-badge {
         display: inline-flex;
         align-items: center;
         gap: 5px;
-        background: #f0f3f8;
-        color: #65748b;
+        padding: 5px 11px;
         border-radius: 20px;
-        padding: 5px 10px;
-        font-size: 11px;
+        background: #f1f3f6;
+        color: #7b8798;
+        font-size: 10px;
         font-weight: 600;
+        letter-spacing: 0;
     }
 
     .activity-subtitle {
-        color: #778196;
+        max-width: 570px;
+        margin: 0;
+        color: #9299a5;
         font-size: 14px;
         line-height: 1.6;
     }
 
-    .activity-card {
-        background: white;
-        border: 1px solid #e6ebf2;
-        border-radius: 13px;
-        margin-bottom: 18px;
-        box-shadow: 0 3px 12px rgba(22, 40, 70, 0.025);
+    .activity-btn-export {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        min-width: 112px;
+        padding: 12px 18px;
+        margin-top: 48px;
+        border: none;
+        border-radius: 15px;
+        background: #fff;
+        color: #173966;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, .14);
+        font-size: 14px;
+        font-weight: 700;
+        text-decoration: none;
+        transition: .2s;
     }
 
-    .activity-filter-body {
-        padding: 18px 20px;
+    .activity-btn-export:hover {
+        background: #edf3fb;
+        color: #173966;
+        transform: translateY(-2px);
     }
 
-    .activity-filter-grid {
+    /* FILTER */
+    .activity-filter {
         display: grid;
         grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 12px;
+        gap: 32px;
+        padding: 17px 23px;
+        margin-bottom: 13px;
+        border-radius: 16px;
+        background: linear-gradient(110deg, #102d58, #1d4d82);
+        box-shadow: 0 3px 6px rgba(15, 40, 75, .13);
     }
 
     .activity-field label {
         display: block;
-        margin-bottom: 8px;
-        color: #68768d;
-        font-size: 11px;
+        margin-bottom: 7px;
+        color: #fff;
+        font-size: 14px;
         font-weight: 600;
     }
 
     .activity-control {
         width: 100%;
-        height: 40px;
-        padding: 0 11px;
-        border: 1px solid #dfe5ee;
-        border-radius: 8px;
-        background: white;
-        color: #35435b;
-        font-size: 13px;
+        height: 39px;
+        padding: 0 12px;
+        border: 1px solid transparent;
+        border-radius: 9px;
         outline: none;
+        background: #fff;
+        color: #4d5665;
+        font-family: inherit;
+        font-size: 13px;
     }
 
     .activity-control:focus {
-        border-color: #5279b3;
-        box-shadow: 0 0 0 3px rgba(82, 121, 179, 0.09);
+        border-color: #8fb8ed;
+        box-shadow: 0 0 0 3px rgba(255, 255, 255, .18);
+    }
+
+    /* TABLE */
+    .activity-card {
+        overflow: hidden;
+        border: 1px solid #edf0f4;
+        border-radius: 13px;
+        background: #fff;
+        box-shadow: 0 4px 15px rgba(25, 42, 65, .16);
     }
 
     .activity-table-wrapper {
@@ -99,52 +133,104 @@
 
     .activity-table {
         width: 100%;
-        min-width: 950px;
+        min-width: 0;
+        table-layout: fixed;
         border-collapse: collapse;
     }
 
+    /* Lebar masing-masing kolom */
+    .activity-table th:nth-child(1),
+    .activity-table td:nth-child(1) {
+        width: 15%;
+    }
+
+    .activity-table th:nth-child(2),
+    .activity-table td:nth-child(2) {
+        width: 14%;
+    }
+
+    .activity-table th:nth-child(3),
+    .activity-table td:nth-child(3) {
+        width: 10%;
+    }
+
+    .activity-table th:nth-child(4),
+    .activity-table td:nth-child(4) {
+        width: 20%;
+    }
+
+    .activity-table th:nth-child(5),
+    .activity-table td:nth-child(5) {
+        width: 20%;
+    }
+
+    .activity-table th:nth-child(6),
+    .activity-table td:nth-child(6) {
+        width: 21%;
+    }
+
     .activity-table thead {
-        background: #f8f9fc;
+        background: #fff;
     }
 
     .activity-table th {
-        padding: 15px 17px;
-        text-align: left;
-        color: #7b879c;
-        font-size: 10px;
+        padding: 12px 14px;
+        border-bottom: 1px solid #e9edf2;
+        color: #647895;
+        font-size: 11px;
         font-weight: 700;
-        text-transform: uppercase;
-        letter-spacing: 0.4px;
+        text-align: center;
         white-space: nowrap;
     }
 
     .activity-table td {
-        padding: 15px 17px;
-        border-top: 1px solid #edf0f5;
-        color: #53627a;
-        font-size: 12px;
-        line-height: 1.6;
+        padding: 11px 14px;
+        border-bottom: 1px solid #edf0f4;
+        color: #53647e;
+        font-size: 11px;
+        line-height: 1.35;
+        text-align: center;
         vertical-align: middle;
     }
 
     .activity-table tbody tr:hover {
-        background: #fafbfe;
+        background: #fafcff;
     }
 
     .activity-date {
-        color: #77849a;
+        color: #687c98 !important;
         white-space: nowrap;
     }
 
     .activity-actor {
-        color: #253650;
-        font-weight: 600;
+        color: #17243a !important;
+        font-weight: 700;
         white-space: nowrap;
     }
 
+    .activity-subject,
+    .activity-description,
+    .activity-change {
+        min-width: 0;
+        overflow-wrap: anywhere;
+    }
+
+    .activity-subject {
+        color: #52647e !important;
+    }
+
+    .activity-description {
+        color: #71829b !important;
+    }
+
+    .activity-change {
+        min-width: 150px;
+    }
+
+    /* ACTION BADGES */
     .activity-badge {
         display: inline-block;
-        padding: 5px 10px;
+        padding: 4px 9px;
         border-radius: 20px;
         font-size: 10px;
         font-weight: 700;
@@ -152,28 +238,38 @@
     }
 
     .badge-create {
-        background: #e6f4ec;
-        color: #25804c;
+        background: #e4faf4;
+        color: #159b82;
     }
 
     .badge-update {
-        background: #e8effb;
-        color: #426aab;
+        background: #e5efff;
+        color: #3471d8;
     }
 
     .badge-delete {
-        background: #fbe9e9;
-        color: #c34d4d;
+        background: #ffebee;
+        color: #df5368;
     }
 
     .badge-import {
-        background: #eee9fb;
-        color: #7655ae;
+        background: #e5efff;
+        color: #2869d5;
     }
 
     .badge-export {
-        background: #e4f3f2;
-        color: #25817b;
+        background: #eeedff;
+        color: #6255db;
+    }
+
+    .badge-verify {
+        background: #e9edff;
+        color: #5267d8;
+    }
+
+    .badge-login {
+        background: #edf1f6;
+        color: #60718a;
     }
 
     .badge-default {
@@ -181,138 +277,130 @@
         color: #647188;
     }
 
-    .activity-subject {
-        color: #344761;
-        font-weight: 500;
-        min-width: 140px;
-    }
-
-    .activity-description {
-        color: #718098;
-        min-width: 190px;
-    }
-
-    .activity-change {
-        min-width: 150px;
-    }
-
+    /* PERUBAHAN DATA */
     .change-value {
         display: inline-block;
+        max-width: 145px;
+        overflow: hidden;
         padding: 4px 7px;
-        border-radius: 5px;
-        background: #e8f3ed;
-        color: #34815a;
-        font-size: 10px;
         margin: 2px;
+        border: 1px solid #c8f1df;
+        border-radius: 5px;
+        background: #edfff7;
+        color: #07966d;
+        font-size: 10px;
+        text-overflow: ellipsis;
+        vertical-align: middle;
+        white-space: nowrap;
+    }
+
+    .change-old {
+        border-color: #ffd7dc;
+        background: #fff0f1;
+        color: #df5368;
+    }
+
+    .change-arrow {
+        color: #8c9ab0;
+        font-size: 11px;
     }
 
     .empty-activity {
         padding: 45px 20px !important;
-        text-align: center;
         color: #8591a4 !important;
+        text-align: center !important;
     }
 
     .empty-activity strong {
         display: block;
-        color: #3c4c65;
         margin-bottom: 7px;
+        color: #3c4c65;
         font-size: 14px;
     }
 
+    /* TABLE FOOTER */
     .activity-footer {
-        padding: 15px 18px;
-        border-top: 1px solid #edf0f5;
         display: flex;
-        justify-content: space-between;
         align-items: center;
+        justify-content: space-between;
         gap: 15px;
-        color: #7c879a;
-        font-size: 11px;
+        padding: 11px 13px;
+        color: #8a9bb2;
+        font-size: 10px;
     }
 
     .activity-pagination {
         display: flex;
         align-items: center;
-        gap: 7px;
+        gap: 6px;
     }
 
     .activity-pagination a,
     .activity-pagination span {
-        padding: 7px 11px;
-        border: 1px solid #dfe5ed;
-        border-radius: 7px;
-        text-decoration: none;
+        padding: 6px 10px;
+        border: 1px solid #e1e7ef;
+        border-radius: 6px;
+        background: #fff;
         color: #52617a;
-        background: white;
+        text-decoration: none;
     }
 
     .activity-pagination .current {
-        background: #193b75;
-        color: white;
         border-color: #193b75;
+        background: #193b75;
+        color: #fff;
     }
 
     .activity-pagination .disabled {
-        color: #b2bdcb;
         background: #f8f9fb;
+        color: #b2bdcb;
     }
 
-    .activity-filter-actions {
+    .activity-note {
         display: flex;
-        align-items: center;
-        gap: 8px;
-        margin-top: 16px;
+        justify-content: space-between;
+        gap: 12px;
+        margin-top: 12px;
+        color: #9aa9bd;
+        font-size: 10px;
     }
 
-    .activity-btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        padding: 9px 14px;
-        border: none;
-        border-radius: 7px;
-        cursor: pointer;
-        text-decoration: none;
-        font-size: 12px;
-        font-weight: 600;
-    }
+    @media (max-width: 1000px) {
+        .activity-filter {
+            gap: 16px;
+        }
 
-    .activity-btn-primary {
-        background: #193b75;
-        color: white;
-    }
-
-    .activity-btn-reset {
-        background: #edf0f5;
-        color: #506078;
-    }
-
-    .activity-btn-export {
-    background: white;
-    color: #193b75;
-    border: 1px solid #dfe5ed;
-    white-space: nowrap;
-    transition: 0.2s;
-    }
-
-    .activity-btn-export:hover {
-        background: #193b75;
-        color: white;
-    }
-
-    @media (max-width: 900px) {
-        .activity-filter-grid {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
+        .activity-heading h1 {
+            font-size: 29px;
         }
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 750px) {
         .activity-header {
             flex-direction: column;
         }
 
-        .activity-filter-grid {
+        .activity-btn-export {
+            margin-top: 0;
+        }
+
+        .activity-filter {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .activity-note {
+            flex-direction: column;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .activity-filter {
             grid-template-columns: 1fr;
+            gap: 14px;
+        }
+
+        .activity-heading h1 {
+            font-size: 25px;
         }
 
         .activity-footer {
@@ -327,125 +415,104 @@
 
 <div class="activity-page">
 
-    <!-- JUDUL HALAMAN -->
+    <!-- HEADER -->
     <div class="activity-header">
-        <div>
-            <div class="activity-title">
-                <h1>Riwayat Aktivitas</h1>
 
-                <span class="locked-badge">
-                    Terkunci
-                </span>
-            </div>
+        <div class="activity-heading">
+            <h1>
+                Riwayat Aktivitas
+                <span class="locked-badge">🔒 Terkunci</span>
+            </h1>
 
             <p class="activity-subtitle">
                 Catatan setiap tindakan pada aplikasi.
                 Catatan ini tidak dapat diubah atau dihapus siapa pun.
             </p>
         </div>
+
         <a
             href="{{ route('activity-logs.export', request()->only(['from', 'to', 'actor', 'action'])) }}"
-            class="activity-btn activity-btn-export"
+            class="activity-btn-export"
         >
             Ekspor
         </a>
+
     </div>
 
     <!-- FILTER -->
-    <div class="activity-card">
-        <div class="activity-filter-body">
+    <form
+        method="GET"
+        action="{{ route('activity-logs.index') }}"
+        class="activity-filter"
+    >
 
-            <form method="GET" action="{{ route('activity-logs.index') }}">
-
-                <div class="activity-filter-grid">
-
-                    <div class="activity-field">
-                        <label for="from">Dari tanggal</label>
-
-                        <input
-                            type="date"
-                            id="from"
-                            name="from"
-                            class="activity-control"
-                            value="{{ $filters['from'] ?? '' }}"
-                        >
-                    </div>
-
-                    <div class="activity-field">
-                        <label for="to">Sampai tanggal</label>
-
-                        <input
-                            type="date"
-                            id="to"
-                            name="to"
-                            class="activity-control"
-                            value="{{ $filters['to'] ?? '' }}"
-                        >
-                    </div>
-
-                    <div class="activity-field">
-                        <label for="actor">Pelaku</label>
-
-                        <select
-                            name="actor"
-                            id="actor"
-                            class="activity-control"
-                        >
-                            <option value="">Semua pelaku</option>
-
-                            @foreach ($actors as $actor)
-                                <option
-                                    value="{{ $actor }}"
-                                    @selected(($filters['actor'] ?? '') === $actor)
-                                >
-                                    {{ $actor }}
-                                </option>
-                            @endforeach
-
-                        </select>
-                    </div>
-
-                    <div class="activity-field">
-                        <label for="action">Jenis aksi</label>
-
-                        <select
-                            name="action"
-                            id="action"
-                            class="activity-control"
-                        >
-                            <option value="">Semua aksi</option>
-
-                            @foreach ($actions as $action)
-                                <option
-                                    value="{{ $action }}"
-                                    @selected(($filters['action'] ?? '') === $action)
-                                >
-                                    {{ $action }}
-                                </option>
-                            @endforeach
-
-                        </select>
-                    </div>
-
-                </div>
-
-                <div class="activity-filter-actions">
-                    <button type="submit" class="activity-btn activity-btn-primary">
-                        Terapkan Filter
-                    </button>
-
-                    <a
-                        href="{{ route('activity-logs.index') }}"
-                        class="activity-btn activity-btn-reset"
-                    >
-                        Reset
-                    </a>
-                </div>
-
-            </form>
-
+        <div class="activity-field">
+            <label for="from">Dari tanggal</label>
+            <input
+                type="date"
+                id="from"
+                name="from"
+                class="activity-control"
+                value="{{ $filters['from'] ?? '' }}"
+                onchange="this.form.submit()"
+            >
         </div>
-    </div>
+
+        <div class="activity-field">
+            <label for="to">Sampai tanggal</label>
+            <input
+                type="date"
+                id="to"
+                name="to"
+                class="activity-control"
+                value="{{ $filters['to'] ?? '' }}"
+                onchange="this.form.submit()"
+            >
+        </div>
+
+        <div class="activity-field">
+            <label for="actor">Pelaku</label>
+            <select
+                name="actor"
+                id="actor"
+                class="activity-control"
+                onchange="this.form.submit()"
+            >
+                <option value="">Semua jenis</option>
+
+                @foreach ($actors as $actor)
+                    <option
+                        value="{{ $actor }}"
+                        @selected(($filters['actor'] ?? '') === $actor)
+                    >
+                        {{ $actor }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+        <div class="activity-field">
+            <label for="action">Jenis aksi</label>
+            <select
+                name="action"
+                id="action"
+                class="activity-control"
+                onchange="this.form.submit()"
+            >
+                <option value="">Semua jenis</option>
+
+                @foreach ($actions as $action)
+                    <option
+                        value="{{ $action }}"
+                        @selected(($filters['action'] ?? '') === $action)
+                    >
+                        {{ ucfirst($action) }}
+                    </option>
+                @endforeach
+            </select>
+        </div>
+
+    </form>
 
     <!-- TABEL RIWAYAT AKTIVITAS -->
     <div class="activity-card">
@@ -483,6 +550,9 @@
                                 'deleted' => 'Hapus',
                                 'imported' => 'Import',
                                 'exported' => 'Ekspor',
+                                'verified' => 'Verifikasi',
+                                'login' => 'Login',
+                                'restored' => 'Pulihkan',
                                 'test' => 'Uji Coba',
                             ];
 
@@ -492,6 +562,8 @@
                                 'deleted' => 'badge-delete',
                                 'imported' => 'badge-import',
                                 'exported' => 'badge-export',
+                                'verified' => 'badge-verify',
+                                'login' => 'badge-login',
                             ];
 
                             $actionLabel = $actionLabels[$actionKey]
@@ -517,7 +589,7 @@
                         <tr>
 
                             <td class="activity-date">
-                                {{ $activity->created_at?->format('d M Y • H:i') }}
+                                {{ $activity->created_at?->format('d M Y · H.i') }}
                             </td>
 
                             <td class="activity-actor">
@@ -539,19 +611,26 @@
                             </td>
 
                             <td class="activity-change">
-                                @if (is_array($changes) && isset($changes['old'], $changes['new']))
-                                    <span class="change-value">
-                                        {{ is_scalar($changes['old']) ? $changes['old'] : 'Data sebelumnya' }}
+
+                                @if (
+                                    is_array($changes) &&
+                                    (isset($changes['old']) || isset($changes['new']))
+                                )
+
+                                    <span class="change-value change-old">
+                                        {{ is_scalar($changes['old'] ?? null) ? $changes['old'] : 'Data sebelumnya' }}
                                     </span>
 
-                                    →
-                                    
+                                    <span class="change-arrow">→</span>
+
                                     <span class="change-value">
-                                        {{ is_scalar($changes['new']) ? $changes['new'] : 'Data terbaru' }}
+                                        {{ is_scalar($changes['new'] ?? null) ? $changes['new'] : 'Data terbaru' }}
                                     </span>
+
                                 @else
                                     —
                                 @endif
+
                             </td>
 
                         </tr>
@@ -578,41 +657,43 @@
         <div class="activity-footer">
 
             <div>
-                Menampilkan
-                {{ $activities->firstItem() ?? 0 }}
-                sampai
-                {{ $activities->lastItem() ?? 0 }}
-                dari
-                {{ $activities->total() }}
-                aktivitas
+                {{ $activities->total() }} catatan ditampilkan
             </div>
 
             <div class="activity-pagination">
 
                 @if ($activities->onFirstPage())
-                    <span class="disabled">Sebelumnya</span>
+                    <span class="disabled">‹</span>
                 @else
-                    <a href="{{ $activities->previousPageUrl() }}">
-                        Sebelumnya
-                    </a>
+                    <a href="{{ $activities->previousPageUrl() }}">‹</a>
                 @endif
 
                 <span class="current">
                     {{ $activities->currentPage() }}
-                    / {{ max($activities->lastPage(), 1) }}
                 </span>
 
                 @if ($activities->hasMorePages())
-                    <a href="{{ $activities->nextPageUrl() }}">
-                        Selanjutnya
-                    </a>
+                    <a href="{{ $activities->nextPageUrl() }}">›</a>
                 @else
-                    <span class="disabled">Selanjutnya</span>
+                    <span class="disabled">›</span>
                 @endif
 
             </div>
 
         </div>
+
+    </div>
+
+    <!-- CATATAN BAWAH -->
+    <div class="activity-note">
+
+        <span>
+            Menampilkan aktivitas sejak
+            {{ $activities->last()?->created_at?->format('d M Y') ?? 'belum tersedia' }}
+            hingga hari ini.
+        </span>
+
+        <span>🔒 Catatan aktivitas bersifat permanen</span>
 
     </div>
 
