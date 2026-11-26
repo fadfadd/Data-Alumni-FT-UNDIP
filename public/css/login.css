@@ -1,0 +1,185 @@
+:root {
+    --tinggi-input: 2.4rem;
+    --radius-input: 15px;
+    --geser-judul: -90px;
+    --geser-kartu: -70px;
+    --navy: #0b2454;
+    --navy-gelap: #061a40;
+    --emas: #e6b832;
+    --abu-input: #e2e2e2;
+    --teks: #1f2937;
+}
+
+* { box-sizing: border-box; }
+
+.login-page {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    font-family: "Montserrat", system-ui, sans-serif;
+    color: var(--teks);
+    background:
+        linear-gradient(135deg, rgba(4, 18, 78, 0.95) 0%, rgba(28, 48, 110, 0.7) 50%, rgba(45, 62, 112, 0.55) 100%),
+        url("../images/bg_undip.jpeg") center / cover no-repeat;
+}
+
+.login-logo { padding: 1.5rem 2rem; }
+.login-logo img { display: block; height: 110px; width: auto; }
+
+.login-main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 1rem 3rem;
+}
+
+.login-heading {
+    margin: 0 0 0rem;
+    text-align: center;
+    color: #fff;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 1.9rem;
+    font-weight: bold;
+    line-height: 1.4;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    text-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+    -webkit-text-stroke: 0.5px #fff;
+    transform: translateY(var(--geser-judul)); 
+}
+
+.login-card {
+    width: 100%;
+    max-width: 400px;
+    padding: 1.25rem 3rem 2rem;
+    background: #fff;
+    border-radius: 28px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    transform: translateY(var(--geser-kartu));
+}
+
+.login-title {
+    margin: 0 0 1rem;
+    text-align: center;
+    font-size: 2.4rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    color: var(--navy);
+    text-shadow: 1px 2px 3px rgba(11, 36, 84, 0.35);
+}
+
+label {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 1rem 0 0.4rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--emas);
+}
+
+.icon { width: 1.1rem; height: 1.1rem; }
+
+input {
+    width: 100%;
+    height: var(--tinggi-input);
+    padding: 0 1.1rem;
+    border: 0;
+    border-radius: var(--radius-input);
+    background: var(--abu-input);
+    font: inherit;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--teks);
+}
+/* Sesuai desain. Kontrasnya rendah, ganti ke #888 kalau mau lebih terbaca. */
+input::placeholder { color: #fff; font-weight: 600; opacity: 1; }
+input:focus { outline: 2px solid var(--navy); outline-offset: 2px; }
+
+.forgot {
+    display: inline-block;
+    margin-top: 0.45rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--emas);
+    text-decoration: none;
+}
+.forgot:hover { text-decoration: underline; }
+
+.btn-login {
+    width: 100%;
+    height: 3rem;
+    margin-top: 1.2rem;
+    border: 0;
+    border-radius: 999px;
+    background: var(--navy);
+    color: var(--emas);
+    font: inherit;
+    font-size: 1rem;
+    font-weight: 800;
+    cursor: pointer;
+}
+.btn-login:hover { background: var(--navy-gelap); }
+
+.alert {
+    margin-top: 0.9rem;
+    padding: 0.6rem 0.9rem;
+    border-radius: 14px;
+    font-size: 0.8rem;
+    line-height: 1.4;
+}
+.alert-error { background: #fde8e8; color: #9b1c1c; }
+.alert-info { background: #e0ecff; color: #1e40af; }
+
+.auth-switch {
+    margin: 1rem 0 0;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--emas);
+}
+.auth-switch a { color: var(--emas); text-decoration: underline; }
+
+.field-error {
+    margin: 0.4rem 0 0 1rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #9b1c1c;
+}
+
+/* Ikon mata di kolom password */
+.pw-wrap { position: relative; }
+.pw-wrap input { padding-right: 3rem; }
+.pw-toggle {
+    position: absolute;
+    top: 50%;
+    right: 0.7rem;
+    transform: translateY(-50%);
+    display: grid;
+    place-items: center;
+    width: 1.8rem;
+    height: 1.8rem;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: #6b7280;
+    cursor: pointer;
+}
+.pw-toggle svg { width: 1.3rem; height: 1.3rem; fill: currentColor; }
+.pw-toggle .mata-coret { display: none; }
+.pw-toggle.tampil .mata-buka { display: none; }
+.pw-toggle.tampil .mata-coret { display: block; }
+
+@media (max-width: 480px) {
+    .login-card { padding: 1.25rem 1.5rem 1.75rem; }
+    .login-logo { padding: 1rem 1.25rem; }
+    .login-logo img { height: 56px; }
+    .login-heading { font-size: 1.1rem; }
+}
+
+/* Halaman lupa & reset password */
+.login-title.kecil { font-size: 1.7rem; }
+.login-petunjuk { margin: 0 0 0.4rem; font-size: 0.8rem; line-height: 1.5; color: #6b7280; text-align: center; }
